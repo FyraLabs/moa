@@ -16,8 +16,8 @@ RUN pip3 install -r requirements.txt
 COPY --from=source . .
 COPY config.py moa/
 
-ENV MOA_CONFIG config.ProductionConfig
-
 USER moa
+
+ENV MOA_CONFIG config.ProductionConfig
 
 CMD ["python3", "app.py"]
