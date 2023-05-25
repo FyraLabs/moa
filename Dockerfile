@@ -5,7 +5,6 @@ RUN apt-get update -qq \
   && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
-
 RUN useradd -m -r moa \
   && chown moa /app
 
