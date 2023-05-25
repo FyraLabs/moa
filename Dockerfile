@@ -10,14 +10,12 @@ RUN apt-get update -qq \
 WORKDIR /app
 
 COPY --from=source requirements.txt requirements.txt
-
 RUN pip3 install -r requirements.txt
 
 COPY --from=source . .
 COPY config.py moa/
 
 USER moa
-
 ENV MOA_CONFIG config.ProductionConfig
 
 CMD ["python3", "app.py"]
