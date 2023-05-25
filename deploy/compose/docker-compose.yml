@@ -1,0 +1,35 @@
+services:
+  web:
+    restart: always
+    image: ghcr.io/fyralabs/moa:main
+    environment:
+      MOA_CONFIG: config.ProductionConfig
+      FLASK_DEBUG: "0"
+    env_file:
+      - moa.env
+    volumes:
+      - moa:/app/data
+  worker:
+    restart: always
+    image: ghcr.io/fyralabs/moa:main
+    environment:
+      MOA_CONFIG: ProductionConfig
+    env_file:
+      - moa.env
+    command: "/app/worker.sh"
+    volumes:
+      - moa:/app/data
+  mysql:
+    restart: always
+    image: mysql:8
+    env_file:
+      - mysql.env
+    cap_add:
+      - SYS_NICE
+    volumes:
+      - mysql:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  moa:
+  mysql:
