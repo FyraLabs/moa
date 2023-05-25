@@ -13,6 +13,7 @@ RUN pip3 install -r requirements.txt
 
 COPY --from=source . .
 COPY config.py moa/
+COPY worker.sh .
 
 USER moa
 
