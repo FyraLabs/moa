@@ -1,8 +1,13 @@
 FROM python:3.7
 
+RUN useradd -m -r moa \
+  && chown moa /app
+
 RUN apt-get update -qq \
   && DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends build-essential git-core \
   && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
 
 COPY --from=source requirements.txt requirements.txt
 
@@ -12,5 +17,7 @@ COPY --from=source . .
 COPY config.py moa/
 
 ENV MOA_CONFIG config.ProductionConfig
+
+USER moa
 
 CMD ["python3", "app.py"]
