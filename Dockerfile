@@ -15,6 +15,5 @@ COPY --from=source . .
 COPY config.py moa/
 
 USER moa
-ENV MOA_CONFIG config.ProductionConfig
 
 CMD ["python3", "app.py"]
