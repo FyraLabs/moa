@@ -20,5 +20,5 @@ COPY --chown=moa worker.sh .
 RUN chmod +x worker.sh
 
 USER moa
-
+EXPOSE 5000
 CMD ["python3", "app.py"]
