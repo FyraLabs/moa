@@ -17,11 +17,12 @@ COPY --chown=moa --from=source . .
 COPY --chown=moa config.py .
 COPY --chown=moa worker.sh .
 
+RUN sed -i -e "s/app\.run\(\)/app\.run\(host='0.0.0.0'\)/" moa/app.py
+
 RUN chmod +x worker.sh
 
 USER moa
 
-ENV FLASK_RUN_HOST 0.0.0.0
 EXPOSE 5000
 
 CMD ["python3", "app.py"]
