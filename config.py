@@ -42,3 +42,4 @@ class ProductionConfig(DefaultConfig):
     STATS_POSTER_ACCESS_TOKEN = getenv('STATS_POSTER_ACCESS_TOKEN')
 
     TRUST_PROXY_HEADERS = (getenv('MOA_TRUST_PROXY_HEADERS', 'false') == 'true')
+    WORKER_JOBS = int(getenv('MOA_WORKER_JOBS', 1))
