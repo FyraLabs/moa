@@ -14,7 +14,7 @@ COPY --from=source requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 
 COPY --from=source . .
-COPY config.py moa/
+COPY config.py .
 COPY worker.sh .
 
 RUN chmod +x worker.sh
