@@ -1,0 +1,22 @@
+diff --git a/app.py b/app.py
+index b1bcb8d..f269794 100644
+--- a/app.py
++++ b/app.py
+@@ -400,7 +400,10 @@ def mastodon_login():
+             flash('Invalid Mastodon ID')
+             return redirect(url_for('index'))
+
+-        if host in app.config.get('MASTODON_BLACKLIST', []):
++        blacklist = app.config.get('MASTODON_BLACKLIST', [])
++        whitelist = app.config.get('MASTODON_WHITELIST')
++
++        if (host in blacklist) or (whitelist != None and host not in whitelist):
+             flash('Access Denied')
+             return redirect(url_for('index'))
+
+@@ -795,4 +798,4 @@ def page_not_found(e):
+
+ if __name__ == '__main__':
+
+-    app.run()
++    app.run(host=app.config.get('HOST'), port=app.config.get('PORT'))

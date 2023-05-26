@@ -2,6 +2,8 @@ from defaults import DefaultConfig
 from os import getenv
 
 class ProductionConfig(DefaultConfig):
+    HOST = getenv('MOA_HOST', '127.0.0.1')
+    PORT = int(getenv('MOA_PORT', 5000))
     DEBUG = (getenv('MOA_DEBUG', 'false') == 'true')
     DEVELOPMENT = (getenv('MOA_DEVELOPMENT', 'false') == 'true')
     TESTING = (getenv('MOA_TESTING', 'false') == 'true')
@@ -43,3 +45,8 @@ class ProductionConfig(DefaultConfig):
 
     TRUST_PROXY_HEADERS = (getenv('MOA_TRUST_PROXY_HEADERS', 'false') == 'true')
     WORKER_JOBS = int(getenv('MOA_WORKER_JOBS', 1))
+
+    # A list of instances that Moa will not accept.
+    MASTODON_BLACKLIST = getenv('MOA_MASTODON_BLACKLIST').split(',') if getenv('MOA_MASTODON_BLACKLIST') != None else []
+    # If this is set, Moa will only accept connections from these instances.
+    MASTODON_WHITELIST = getenv('MOA_MASTODON_WHITELIST').split(',') if getenv('MOA_MASTODON_WHITELIST') != None else None
