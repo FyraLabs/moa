@@ -17,6 +17,8 @@ COPY --from=source . .
 COPY config.py moa/
 COPY worker.sh .
 
+RUN chmod +x worker.sh
+
 USER moa
 
 CMD ["python3", "app.py"]
