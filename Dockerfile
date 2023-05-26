@@ -20,5 +20,8 @@ COPY --chown=moa worker.sh .
 RUN chmod +x worker.sh
 
 USER moa
+
+ENV FLASK_RUN_HOST 0.0.0.0
 EXPOSE 5000
+
 CMD ["python3", "app.py"]
