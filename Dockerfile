@@ -10,12 +10,12 @@ WORKDIR /app
 RUN useradd -m -r moa \
   && chown moa /app
 
-COPY --from=source requirements.txt requirements.txt
+COPY --chown=moa --from=source requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 
-COPY --from=source . .
-COPY config.py .
-COPY worker.sh .
+COPY --chown=moa --from=source . .
+COPY --chown=moa config.py .
+COPY --chown=moa worker.sh .
 
 RUN chmod +x worker.sh
 
