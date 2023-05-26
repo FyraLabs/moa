@@ -21,4 +21,4 @@ RUN chmod +x worker.sh
 
 USER moa
 EXPOSE 5000
-CMD ["python3", "app.py"]
+CMD ["sh", "-c" "python3 -m moa.models && python3 app.py"]
