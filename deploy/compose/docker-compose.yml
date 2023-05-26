@@ -5,6 +5,8 @@ services:
     environment:
       MOA_CONFIG: config.ProductionConfig
       FLASK_DEBUG: "0"
+    ports:
+      - 5000:5000
     env_file:
       - moa.env
     volumes:
