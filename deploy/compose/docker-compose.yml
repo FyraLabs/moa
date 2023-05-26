@@ -10,7 +10,7 @@ services:
     volumes:
       - moa:/app/data
   migrate:
-    restart: if-failed
+    restart: on-failure
     image: ghcr.io/fyralabs/moa:main
     environment:
       MOA_CONFIG: ProductionConfig
