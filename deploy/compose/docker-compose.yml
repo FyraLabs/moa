@@ -9,6 +9,17 @@ services:
       - moa.env
     volumes:
       - moa:/app/data
+  migrate:
+    restart: if-failed
+    image: ghcr.io/fyralabs/moa:main
+    environment:
+      MOA_CONFIG: ProductionConfig
+      FLASK_DEBUG: "0"
+    env_file:
+      - moa.env
+    command: "python3 -m moa.models"
+    volumes:
+      - moa:/app/data
   worker:
     restart: always
     image: ghcr.io/fyralabs/moa:main
